@@ -1,0 +1,36 @@
+{
+  "name": "coininfos",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "heroku-prebuild": "vite build",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@rollup/plugin-alias": "^3.1.9",
+    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.30",
+    "@tailwindcss/typography": "^0.5.2",
+    "autoprefixer": "^10.4.2",
+    "axios": "^0.26.1",
+    "daisyui": "^2.6.4",
+    "postcss": "^8.4.8",
+    "svelte": "^3.44.0",
+    "svelte-fullcalendar": "^2.0.0-beta.0",
+    "svelte-preprocess": "^4.10.4",
+    "svelte-spa-router": "^3.2.0",
+    "tailwindcss": "^3.0.23",
+    "vite": "^2.8.0"
+  },
+  "dependencies": {
+    "@budibase/svelte-ag-grid": "^1.0.4",
+    "@fullcalendar/common": "^5.11.0",
+    "@fullcalendar/core": "^5.11.0",
+    "@fullcalendar/daygrid": "^5.11.0",
+    "@fullcalendar/interaction": "^5.11.0",
+    "@fullcalendar/timegrid": "^5.11.0",
+    "lodash": "^4.17.21",
+    "svelte-apexcharts": "^1.0.2"
+  }
+}
