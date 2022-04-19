@@ -1,6 +1,7 @@
 <script>
   import positiveImg from "@/assets/images/positive.png";
   import negativeImg from "@/assets/images/negative.png";
+  import invalidImg from "@/assets/images/invalid.jpg";
 
   export let item;
 </script>
@@ -9,8 +10,10 @@
   <figure>
     {#if item.recomendedAction === "buy"}
       <img src={positiveImg} alt="Positive" />
-    {:else}
+    {:else if item.recomendedAction === "sell"}
       <img src={negativeImg} alt="Negative" />
+    {:else}
+      <img src={invalidImg} alt="Invalid" />
     {/if}
   </figure>
   <div class="card-body">

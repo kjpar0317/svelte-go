@@ -1,5 +1,5 @@
 <script>
-  import { onDestroy } from "svelte";
+  import { onMount, onDestroy } from "svelte";
   import { chart } from "svelte-apexcharts";
 
   // @ts-ignore
@@ -106,13 +106,13 @@
     options2.chart.foreColor = getTextColorByTheme(obj.darkMode);
   });
 
-  async function handleSelectCoinAiAnalysis(val) {
-    common.setIsLoading(true);
+  async function handleSelectCoinAiAnalysis(val, bNoLoading) {
+    !bNoLoading && common.setIsLoading(true);
 
     sResults = await getAiSentiment(val);
     aResults = await getAiAnalysis(val);
 
-    common.setIsLoading(false);
+    !bNoLoading && common.setIsLoading(false);
 
     if (sResults !== null && sResults.RelatedArticles.length > 0) {
       options1.series = [sResults.sentiment, 100 - sResults.sentiment];
@@ -161,6 +161,18 @@
       ];
     }
   }
+
+  onMount(() => {
+    const hinterval = setInterval(() => {
+      handleSelectCoinAiAnalysis(currCoin, true);
+      common.setTimeout(60);
+    }, 1000 * 60);
+
+    common.setMaxTimeout(60);
+    common.setTimeout(60);
+
+    return () => clearInterval(hinterval);
+  });
 
   $: handleSelectCoinAiAnalysis(currCoin);
 
