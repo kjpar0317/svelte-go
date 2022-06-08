@@ -8,8 +8,6 @@
   // @ts-ignore
   import DashboardCard from "@/lib/layout/card/DashboardCard.svelte";
 
-  // let items = [];
-
   const fetchResult = useQuery(
     "coinNews",
     async () => {
@@ -23,11 +21,6 @@
     },
     { refetchOnWindowFocus: false }
   );
-
-  // onMount(async () => {
-  //   items = await getCoinNews();
-  //   common.setIsLoading(false);
-  // });
 </script>
 
 <div class="py-6">
