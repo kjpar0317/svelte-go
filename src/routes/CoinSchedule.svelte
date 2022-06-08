@@ -1,4 +1,5 @@
 <script>
+  // @ts-ignore
   import { useQuery } from "@sveltestack/svelte-query";
   import FullCalendar from "svelte-fullcalendar";
 
