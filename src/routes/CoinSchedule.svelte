@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from "svelte";
+  import { useQuery } from "@sveltestack/svelte-query";
   import FullCalendar from "svelte-fullcalendar";
 
   // @ts-ignore
@@ -9,49 +9,56 @@
   // @ts-ignore
   import { getCoinSchedule } from "@/apis/coin";
 
-  const options = {
-    initialView: "dayGridMonth",
-    plugins: [],
-    locale: "ko",
-    headerToolbar: {
-      left: "prev,next today",
-      center: "title",
-      right: "dayGridMonth,timeGridWeek,timeGridDay",
-    },
-  };
-  let results = [];
+  const fetchResult = useQuery(
+    "coinSchedule",
+    async () => {
+      const options = {
+        initialView: "dayGridMonth",
+        plugins: [],
+        locale: "ko",
+        headerToolbar: {
+          left: "prev,next today",
+          center: "title",
+          right: "dayGridMonth,timeGridWeek,timeGridDay",
+        },
+      };
 
-  onMount(async () => {
-    common.setIsLoading(true);
+      common.setIsLoading(true);
 
-    results = await getCoinSchedule();
+      const results = await getCoinSchedule();
 
-    common.setIsLoading(false);
+      common.setIsLoading(false);
 
-    options.plugins = [
-      // @ts-ignore
-      (await import("@fullcalendar/daygrid")).default,
-      // @ts-ignore
-      (await import("@fullcalendar/timegrid")).default,
-    ];
+      options.plugins = [
+        // @ts-ignore
+        (await import("@fullcalendar/daygrid")).default,
+        // @ts-ignore
+        (await import("@fullcalendar/timegrid")).default,
+      ];
 
-    let events = [];
+      let events = [];
 
-    results.forEach((f) => {
-      events.push({
-        title: f.name,
-        start: f.date,
-        end: f.date_to,
-        classNames: ["text-base-content"],
-        url: f.link,
-        color: getCoinColor(f.coin),
+      results.forEach((f) => {
+        events.push({
+          title: f.name,
+          start: f.date,
+          end: f.date_to,
+          classNames: ["text-base-content"],
+          url: f.link,
+          color: getCoinColor(f.coin),
+        });
       });
-    });
 
-    options.events = events;
-  });
+      options.events = events;
+
+      return options;
+    },
+    { refetchOnWindowFocus: false }
+  );
 </script>
 
 <div class="mx-auto space-y-2 max-w-7xl text-base-content">
-  <FullCalendar {options} />
+  {#if $fetchResult.isSuccess}
+    <FullCalendar options={$fetchResult.data} />
+  {/if}
 </div>

@@ -1,5 +1,6 @@
 <script>
-  import { onMount } from "svelte";
+  import { useQuery } from "@sveltestack/svelte-query";
+
   // @ts-ignore
   import { common } from "@/stores/common";
   // @ts-ignore
@@ -7,14 +8,26 @@
   // @ts-ignore
   import DashboardCard from "@/lib/layout/card/DashboardCard.svelte";
 
-  let items = [];
+  // let items = [];
 
-  common.setIsLoading(true);
+  const fetchResult = useQuery(
+    "coinNews",
+    async () => {
+      common.setIsLoading(true);
 
-  onMount(async () => {
-    items = await getCoinNews();
-    common.setIsLoading(false);
-  });
+      const data = await getCoinNews();
+
+      common.setIsLoading(false);
+
+      return data;
+    },
+    { refetchOnWindowFocus: false }
+  );
+
+  // onMount(async () => {
+  //   items = await getCoinNews();
+  //   common.setIsLoading(false);
+  // });
 </script>
 
 <div class="py-6">
@@ -25,11 +38,11 @@
       <div
         class="grid grid-cols-1 bg-gray-200 bg-opacity-25 dark:bg-gray-800 md:grid-cols-2 "
       >
-        {#if items}
-          {#each items as item, index}
+        {#if $fetchResult.isSuccess}
+          {#each $fetchResult.data as item, index}
             {#if index % 2 === 1}
               <div
-                class="p-6 border-t border-r border-b border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l"
+                class="p-6 border-t border-b border-r border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l"
               >
                 <DashboardCard data={item} />
               </div>

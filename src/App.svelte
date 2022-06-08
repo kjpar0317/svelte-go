@@ -2,6 +2,7 @@
   // @ts-nocheck
   import { onDestroy } from "svelte";
   import Router from "svelte-spa-router";
+  import { QueryClient, QueryClientProvider } from "@sveltestack/svelte-query";
 
   import { routes } from "./routes";
   import { common } from "@/stores/common";
@@ -16,6 +17,8 @@
   let isLoading = false;
   let darkValue = true;
 
+  const queryClient = new QueryClient();
+
   const loadingSub = common.subscribe((value) => {
     isLoading = value.isLoading;
   });
@@ -28,19 +31,21 @@
   onDestroy(layoutSub);
 </script>
 
-<div
-  data-theme={darkValue ? "dark" : "corporate"}
-  class={darkValue ? "dark font-sans antialiased" : "font-sans antialiased"}
->
-  <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-    <Navbar />
-    <Header />
-    <main>
-      <Router {routes} />
-    </main>
-    <Footer />
-    {#if isLoading}
-      <Loading />
-    {/if}
+<QueryClientProvider client={queryClient}>
+  <div
+    data-theme={darkValue ? "dark" : "corporate"}
+    class={darkValue ? "dark font-sans antialiased" : "font-sans antialiased"}
+  >
+    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+      <Navbar />
+      <Header />
+      <main>
+        <Router {routes} />
+      </main>
+      <Footer />
+      {#if isLoading}
+        <Loading />
+      {/if}
+    </div>
   </div>
-</div>
+</QueryClientProvider>

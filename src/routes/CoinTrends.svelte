@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from "svelte";
+  import { useQuery } from "@sveltestack/svelte-query";
 
   // @ts-ignore
   import { common } from "@/stores/common";
@@ -8,20 +8,24 @@
   // @ts-ignore
   import CoinTrendCard from "@/lib/layout/card/CoinTrendCard.svelte";
 
-  let results = null;
+  const fetchResult = useQuery(
+    "coinTrends",
+    async () => {
+      common.setIsLoading(true);
 
-  onMount(async () => {
-    common.setIsLoading(true);
+      const data = await getCoinTrends();
 
-    results = await getCoinTrends();
+      common.setIsLoading(false);
 
-    common.setIsLoading(false);
-  });
+      return data;
+    },
+    { refetchOnWindowFocus: false }
+  );
 </script>
 
 <div class="mx-auto space-y-2 max-w-7xl pt-5">
-  {#if results !== null}
-    {#each results.result as item, index}
+  {#if $fetchResult.isSuccess}
+    {#each $fetchResult.data as item, index}
       <CoinTrendCard {item} />
     {/each}
   {/if}

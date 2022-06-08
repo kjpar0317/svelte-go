@@ -11,10 +11,10 @@ export default defineConfig({
     alias: {
       "@": resolve(__dirname, "src"),
     },
-    dedupe: ['@fullcalendar/common'],
+    dedupe: ["@fullcalendar/common"],
   },
   optimizeDeps: {
-    include: ['@fullcalendar/common'],
+    include: ["@fullcalendar/common"],
   },
   server: {
     proxy: {

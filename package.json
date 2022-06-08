@@ -14,6 +14,7 @@
     "@tailwindcss/typography": "^0.5.2",
     "autoprefixer": "^10.4.2",
     "axios": "^0.26.1",
+    "broadcast-channel": "^4.13.0",
     "daisyui": "^2.6.4",
     "postcss": "^8.4.8",
     "svelte": "^3.44.0",
@@ -30,6 +31,7 @@
     "@fullcalendar/daygrid": "^5.11.0",
     "@fullcalendar/interaction": "^5.11.0",
     "@fullcalendar/timegrid": "^5.11.0",
+    "@sveltestack/svelte-query": "^1.6.0",   
     "lodash": "^4.17.21",
     "svelte-apexcharts": "^1.0.2"
   }
