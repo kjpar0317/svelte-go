@@ -18,7 +18,7 @@
 
       common.setIsLoading(false);
 
-      return data;
+      return data.result;
     },
     { refetchOnWindowFocus: false }
   );
