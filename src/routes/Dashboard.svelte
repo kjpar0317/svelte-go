@@ -20,7 +20,7 @@
 
       return data;
     },
-    { refetchOnWindowFocus: false }
+    { refetchOnWindowFocus: false, retry: 2 }
   );
 </script>
 
