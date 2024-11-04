@@ -1,4 +1,5 @@
 <script lang="ts">
+	// @ts-ignore
 	import { page } from '$app/stores';
 	import { onDestroy } from 'svelte';
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+	// @ts-ignore
 	import { page } from '$app/stores';
 	import { onDestroy } from 'svelte';
 	import { cubicOut } from 'svelte/easing';
@@ -52,7 +53,8 @@
 			</div>
 			<div class="space-x-3 text-base-content">
 				{#if $page.url.pathname === '/aiAnalysis'}
-					갱신<progress class="progress w-36 progress-primary" value={$timer} max={maxTimeout} />
+					갱신<progress class="progress w-36 progress-primary" value={timer} max={maxTimeout}
+					></progress>
 					<select value={selected} class="select select-info select-sm" on:change={handleChange}>
 						{#each SUPPORT_COIN as coin}
 							<option value={coin}>
