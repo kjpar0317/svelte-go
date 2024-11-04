@@ -1,3 +1,9 @@
+# svelte-kit
+.svelte-kit
+
+# vscode
+.vscode
+
 # Logs
 logs
 *.log
@@ -13,6 +19,9 @@ dist-ssr
 *.local
 
 package-lock.json
+
+.lock*
+*.lock*
 
 # Editor directories and files
 .vscode/*

@@ -1,10 +1,10 @@
-<script>
+<script lang="ts">
   // @ts-ignore
   import { ARR_MENU_LOCS } from "@/constant/menu";
 </script>
 
 <div class="bg-gray-100 dark:bg-gray-900">
-  <div class="max-w-7xl py-10 mx-auto text-gray-800 dark:text-gray-200">
+  <div class="py-10 mx-auto text-gray-800 max-w-7xl dark:text-gray-200">
     <div class="text-center">
       <h3 class="mb-3 text-2xl">
         Website built with Svelte, Tailwindcss, Daisyui, Golang
