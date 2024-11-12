@@ -10,10 +10,10 @@
 		"noImplicitThis": true,
 		"noFallthroughCasesInSwitch": true,
 		"noUncheckedIndexedAccess": true,
-		"forceConsistentCasingInFileNames": true,
-		"paths": {
-			"$app/*": ["./.svelte-kit/types/src/app/*"]
-		}
+		"forceConsistentCasingInFileNames": true
+		// "paths": {
+		// 	"$app/*": ["./.svelte-kit/types/src/app/*"]
+		// }
 	},
 	/**
 	 * Use global.d.ts instead of compilerOptions.types

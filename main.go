@@ -3,7 +3,6 @@ package main
 import (
 	"coininfos/server/router"
 	"fmt"
-	"log"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
@@ -21,12 +20,12 @@ func main() {
 		Views: engine, //set as render engine
 	})
 
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
+	// .env 파일 로드 시도
+	if err := godotenv.Load(); err != nil {
+		fmt.Println("Error loading .env file:", err)
+		return
 	}
 
-	// env := os.Getenv("APP_ENV")
 	port := os.Getenv("PORT")
 
 	fmt.Println(port)
@@ -37,10 +36,11 @@ func main() {
 
 	app.Use(logger.New())
 	app.Use(cors.New(cors.Config{
-		AllowOrigins:     "*",
+		AllowOrigins:     "http://localhost",
 		AllowHeaders:     "Origin, Content-Type, Accept, Authorization",
 		AllowMethods:     "GET, HEAD, PUT, PATCH, POST, DELETE",
 		AllowCredentials: true,
+		MaxAge:           86400, // 24시간
 	}))
 
 	// swagger 등록
